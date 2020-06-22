@@ -1,4 +1,18 @@
 .App {
- 
+position: relative;
+top: 30%;
+left: 5%
 }
+
+/* .title {
+    position: fixed;
+    top: 30%;
+    left: 75%; 
+}
+ 
+.body {
+    position: ;
+    top: 10%;
+    left: 10%;
+} */
 

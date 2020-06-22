@@ -1,6 +1,8 @@
 import React from 'react'
+import axios from 'axios'
 import './App.css'
-import BookItem from './components/Layout'
+import { AddBook, BookItem, Header, BookInfo, NavBar, BookDetail } from './components/Layout'
+import Author from './components/Author'
 
 class App extends React.Component {
   constructor () {
@@ -8,22 +10,11 @@ class App extends React.Component {
 
     this.state = {
       books: [
-        { done: true, text: 'Shoelace', id: 1 },
-        { done: false, text: 'Bootstrap', id: 2 },
-        { done: false, text: 'Bulma', id: 3 }
+        { done: true, text: 'book1', id: 1 },
+        { done: false, text: 'book2', id: 2 },
+        { done: false, text: 'book3', id: 3 }
       ]
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  handleChange (event) {
-    this.setState({ value: event.target.value })
-  }
-
-  handleSubmit (event) {
-    alert('a book was submitted: ' + this.state.value)
-    event.preventDefault()
   }
 
   toggleBookDone (bookId) {
@@ -46,20 +37,32 @@ class App extends React.Component {
   render () {
     return (
       <div className='App'>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-          Add New Book:
-            <input type='text' value={this.state.books} onChange={this.handleChange} />
-          </label>
-          <input type='submit' value='Submit' />
-        </form>
+        <div class="title"><Header /></div>
+        <div class='body'>
+            <div><NavBar /></div>
 
-        <ul>
-          <li>{this.state.books.map((book) => (
-            <BookItem key={book.id} book={book} toggleBookDone={() => this.toggleBookDone(book.id)} />
-          ))}
-          </li>
-        </ul>
+            <div>
+              <AddBook />
+            </div>
+
+            <ul>
+              <li>{this.state.books.map((book) => (
+                <BookItem key={book.id} book={book} toggleBookDone={() => this.toggleBookDone(book.id)} />
+              ))}
+              </li>
+            </ul>
+
+            <div><BookInfo book='How to JS' /></div>
+            <div>
+              <BookDetail book='book1' />
+              <Author />
+            </div>
+            <br></br>
+            <div><BookInfo book='How to Python' /></div>
+            <div><BookDetail book='book1' /></div>
+            <div><BookInfo book='How to React' /></div>
+            <div><BookDetail book='book1' /></div>
+        </div>
       </div>
     )
   }
